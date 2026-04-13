@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flask 2 Tier App</title>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    font-family: system-ui;
+    color: #e0e0e0;
+    transition: 0.3s;
+}
+
+body.light {
+    background: #f3f4f6;
+    color: #111;
+}
+
+.container {
+    text-align: center;
+    padding: 2rem;
+    max-width: 800px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(90deg, #00d2ff, #7b2ff7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.badge {
+    display: inline-block;
+    margin: 1rem 0 2rem;
+    padding: 0.4rem 1.2rem;
+    border: 1px solid #7b2ff7;
+    border-radius: 999px;
+    font-size: 0.9rem;
+}
+
+.cards {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 1.2rem;
+    flex: 1;
+    min-width: 150px;
+}
+
+.card span {
+    font-size: 0.75rem;
+    color: #9ca3af;
+}
+
+.card strong {
+    display: block;
+    margin-top: 5px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    background: #7b2ff7;
+    color: white;
+    cursor: pointer;
+}
+
+input {
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: none;
+    margin-top: 10px;
+    width: 70%;
+}
+
+.logs {
+    margin-top: 20px;
+    height: 120px;
+    overflow-y: auto;
+    background: rgba(0,0,0,0.3);
+    padding: 10px;
+    text-align: left;
+    font-size: 0.8rem;
+    border-radius: 8px;
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<h1> DevOps Dashboard</h1>
+<div class="badge">#TechWithHer</div>
+
+<div class="cards">
+    <div class="card">
+        <span>Framework</span>
+        <strong>Flask 3.1</strong>
+    </div>
+
+    <div class="card">
+        <span>Runtime</span>
+        <strong id="runtime"></strong>
+    </div>
+
+    <div class="card">
+        <span>Deploy</span>
+        <strong>AWS ECS</strong>
+    </div>
+
+    <div class="card">
+        <span>Uptime</span>
+        <strong id="uptime">0s</strong>
+    </div>
+
+    <div class="card">
+        <span>Network</span>
+        <strong id="network"></strong>
+    </div>
+
+    <div class="card">
+        <span>CPU Usage</span>
+        <strong id="cpu">0%</strong>
+    </div>
+</div>
+
+<!-- API TESTER -->
+<input id="url" placeholder="https://api.example.com">
+<br>
+<button onclick="testAPI()">Test Endpoint</button>
+<p id="result"></p>
+
+<!-- THEME -->
+<button onclick="toggleTheme()">Toggle Theme</button>
+
+<!-- LOGS -->
+<div class="logs" id="logs"></div>
+
+</div>
+
+<script>
+// runtime info
+document.getElementById("runtime").innerText = navigator.userAgent;
+
+// uptime
+let start = Date.now();
+setInterval(() => {
+    document.getElementById("uptime").innerText =
+        Math.floor((Date.now() - start)/1000) + "s";
+}, 1000);
+
+// network
+function updateNetwork() {
+    document.getElementById("network").innerText =
+        navigator.onLine ? "Online" : "Offline";
+}
+updateNetwork();
+window.addEventListener("online", updateNetwork);
+window.addEventListener("offline", updateNetwork);
+
+// fake CPU
+let cpu = 30;
+setInterval(() => {
+    cpu += (Math.random() - 0.5) * 10;
+    cpu = Math.max(0, Math.min(100, cpu));
+    document.getElementById("cpu").innerText = cpu.toFixed(1) + "%";
+}, 1000);
+
+// API tester
+async function testAPI() {
+    const url = document.getElementById("url").value;
+    const start = performance.now();
+
+    try {
+        const res = await fetch(url);
+        const time = (performance.now() - start).toFixed(0);
+
+        document.getElementById("result").innerText =
+            `Status: ${res.status} | ${time} ms`;
+
+        addLog(`Checked ${url} → ${res.status}`);
+    } catch {
+        document.getElementById("result").innerText = "Request failed";
+        addLog(`ERROR hitting ${url}`);
+    }
+}
+
+// logs
+function addLog(msg) {
+    const el = document.getElementById("logs");
+    el.innerHTML += `<div>> ${msg}</div>`;
+    el.scrollTop = el.scrollHeight;
+}
+
+// simulated logs
+const logs = [
+    "Service started",
+    "Health check passed",
+    "Retrying connection",
+    "Cache cleared"
+];
+
+setInterval(() => {
+    addLog(logs[Math.floor(Math.random()*logs.length)]);
+}, 3000);
+
+// theme toggle
+function toggleTheme() {
+    document.body.classList.toggle("light");
+}
+</script>
+
+</body>
+</html>
