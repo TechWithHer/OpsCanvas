@@ -92,6 +92,10 @@ User Interface:
 * Uptime updates every second
 * Network status reacts to connection changes
 
+## Screenshots
+
+![Product Screenshot 1](screenshots/ss_a.png)
+![Product Screenshot 2](screenshots/ss_b.png)
 ---
 
 ## 📸 Preview
