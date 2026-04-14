@@ -9,6 +9,10 @@ It’s designed to demonstrate DevOps concepts like observability, health monito
 ![Docker](https://img.shields.io/badge/Docker-Ready-2496ED)
 ![AWS ECS](https://img.shields.io/badge/AWS-ECS-FF9900)
 
+## Screenshots
+
+![Product Screenshot 1](screenshots/ss_a.png)
+![Product Screenshot 2](screenshots/ss_b.png)
 ---
 
 ## Features
@@ -91,11 +95,6 @@ User Interface:
 * CPU usage is simulated dynamically
 * Uptime updates every second
 * Network status reacts to connection changes
-
-## Screenshots
-
-![Product Screenshot 1](screenshots/ss_a.png)
-![Product Screenshot 2](screenshots/ss_b.png)
 ---
 
 ## 📸 Preview
