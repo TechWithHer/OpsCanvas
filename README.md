@@ -10,9 +10,8 @@ It’s designed to demonstrate DevOps concepts like observability, health monito
 ![AWS ECS](https://img.shields.io/badge/AWS-ECS-FF9900)
 
 ## Screenshots
-
-![Product Screenshot 1](screenshots/ss_a.png)
 ![Product Screenshot 2](screenshots/ss_b.png)
+![Product Screenshot 1](screenshots/ss_a.png)
 ---
 
 ## Features
