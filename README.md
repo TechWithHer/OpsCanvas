@@ -1,4 +1,4 @@
-# 🚀 OpsCanvas
+# OpsCanvas
 
 A minimal Flask web application built for learning containerization and deployment to **AWS ECS (Elastic Container Service)**. It has a dashboard that simulates real-world operational insights directly in the browser—no backend required.
 
@@ -11,7 +11,7 @@ It’s designed to demonstrate DevOps concepts like observability, health monito
 
 ---
 
-## ✨ Features
+## Features
 
 - **Uptime Tracker**  
   Tracks how long the dashboard has been running
@@ -54,8 +54,6 @@ OpsCanvas sits in between:
 ✅ Useful as a learning + demo tool  
 
 ---
-
-## 🛠️ Tech Stack
 
 ## Tech Stack
 
